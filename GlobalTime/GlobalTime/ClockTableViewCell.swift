@@ -8,6 +8,15 @@
 
 import UIKit
 
+/* not neccessary since I can get the time with abbreviation based on identifier
+enum TimeZoneCity: String {
+    case LA = "Los_Angeles"
+    case NY = "New_York"
+}
+*/
+ 
+
+
 class ClockTableViewCell: UITableViewCell {
 
     
@@ -16,33 +25,26 @@ class ClockTableViewCell: UITableViewCell {
     @IBOutlet weak var cellContentView: UIView!
     
     
-    var timeZoneID: String? {
+    var identifier: String? {
         didSet {
             updateViews()
         }
     }
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        //self.clockView.timezone = TimeZone(abbreviation: TimeZone.current.abbreviation() ?? "")
-        // TimeZone.init(identifier: <#T##String#>)
-    }
 
+    //KeyPoints
+    //TimeZone(identifier: "identifier")?.abbreviation() will give you abbreviation for getting the time
+    //now I can pass whole identifier to an array instead of just cityNames
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-
     func updateViews() {
-        guard let timeZoneID = timeZoneID else {return}
-            //this would work with city or different code i am guessing so it will show based on city you choose instead of just abbreviation
-            self.clockView.timezone = TimeZone(abbreviation: timeZoneID)
+        guard let identifier = identifier,
+            let abb = TimeZone(identifier: identifier)?.abbreviation() else {return}
+            self.clockView.timezone = TimeZone(abbreviation: abb)
         
-        if timeZoneID == "PDT" {
-            self.timeZoneNameLabel.text = "Los Angeles"
-        }
+            //get cityname
+            let city = String(identifier.split(separator: "/")[1])
+            self.timeZoneNameLabel.text = city
     }
-
 }
+
+
+
