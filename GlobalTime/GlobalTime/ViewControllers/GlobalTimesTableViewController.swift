@@ -41,6 +41,13 @@ class GlobalTimesTableViewController: UITableViewController {
             customCell.identifier = identifier
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let identifier = timeIdentifiers[indexPath.row]
+        guard let index = timeIdentifiers.firstIndex(of: identifier) else {return}
+        timeIdentifiers.remove(at: index)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
 
     // MARK: - Navigation - this is not assigning this tableVC as delegate of TimeZoneTableVC
 
