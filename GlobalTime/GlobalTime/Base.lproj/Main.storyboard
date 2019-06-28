@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Global Times Table View Controller-->
         <scene sceneID="BCP-nb-rmr">
             <objects>
-                <tableViewController id="TbL-rF-mdS" sceneMemberID="viewController">
+                <tableViewController id="TbL-rF-mdS" customClass="GlobalTimesTableViewController" customModule="globalTime" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wmt-1K-lMe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="2cO-Z8-xXa">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="2cO-Z8-xXa" customClass="ClockTableViewCell" customModule="globalTime" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2cO-Z8-xXa" id="R6N-M7-x9E">
@@ -49,6 +49,11 @@
                                         <constraint firstItem="e72-QD-fff" firstAttribute="leading" secondItem="R6N-M7-x9E" secondAttribute="leadingMargin" constant="5" id="mx7-6e-E6k"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellContentView" destination="R6N-M7-x9E" id="zgR-OO-Zye"/>
+                                    <outlet property="clockView" destination="VJI-W7-PzP" id="yRf-lv-qsA"/>
+                                    <outlet property="timeZoneNameLabel" destination="e72-QD-fff" id="fWY-ET-feg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -68,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="1226.4000000000001" y="212.80788177339903"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Time Zone Table View Controller-->
         <scene sceneID="pDe-nL-X1D">
             <objects>
-                <tableViewController id="SNA-7p-rPk" sceneMemberID="viewController">
+                <tableViewController id="SNA-7p-rPk" customClass="TimeZoneTableViewController" customModule="globalTime" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jpi-r7-lxp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
