@@ -49,9 +49,11 @@ class GlobalTimesTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToTimeZoneTableVC" {
         guard let destVC = segue.destination as? TimeZoneTableViewController else {return}
             destVC.delegate = self
         //you can also do this part through cellForRowAt
+        }
     }
     
     func getCurrentIdentifier() {
@@ -64,6 +66,8 @@ class GlobalTimesTableViewController: UITableViewController {
 extension GlobalTimesTableViewController: TimeZoneDelegate {
     
     func didChooseTimeZone(_ timezone: String) {
+        self.timeIdentifiers.append(timezone)
+        navigationController?.dismiss(animated: true, completion: nil)
         return
     }
 }

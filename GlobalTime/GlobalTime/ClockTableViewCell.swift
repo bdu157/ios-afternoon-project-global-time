@@ -16,7 +16,6 @@ enum TimeZoneCity: String {
 */
  
 
-
 class ClockTableViewCell: UITableViewCell {
 
     

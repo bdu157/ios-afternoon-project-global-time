@@ -64,7 +64,7 @@
                     <navigationItem key="navigationItem" id="QLz-mc-yb7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Dq-0b-Epz">
                             <connections>
-                                <segue destination="brA-1a-qTP" kind="presentation" id="0Ip-ef-17D"/>
+                                <segue destination="brA-1a-qTP" kind="presentation" identifier="ToTimeZoneTableVC" id="0Ip-ef-17D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -106,7 +106,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ckp-qC-015">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="yqk-TF-J7g"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="yqk-TF-J7g">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="SNA-7p-rPk" id="a2n-65-BGT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWE-El-2iL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -147,7 +151,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRY-AU-Tle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1226" y="965"/>
+            <point key="canvasLocation" x="1226" y="935"/>
         </scene>
     </scenes>
 </document>

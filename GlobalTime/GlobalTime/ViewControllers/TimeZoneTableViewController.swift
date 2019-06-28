@@ -41,6 +41,7 @@ class TimeZoneTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else {return}
             let selectedIdentifier = timeIdentifiers[indexPath.row]
+            self.tableView.deselectRow(at: indexPath, animated: true)
             delegate.didChooseTimeZone(selectedIdentifier)
     }
     
@@ -62,5 +63,9 @@ class TimeZoneTableViewController: UITableViewController {
             cityNames.append(cityName)
         }
         return cityNames
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }
