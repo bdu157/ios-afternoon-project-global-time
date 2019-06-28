@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class GlobalTimesTableViewController: UITableViewController {
     
@@ -22,12 +23,14 @@ class GlobalTimesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "World Clock"
         self.getCurrentIdentifier()
+        //self.timeIdentifiers.append("Africa/Bamako")
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print(timeIdentifiers.count)
         return timeIdentifiers.count
     }
 
@@ -39,22 +42,17 @@ class GlobalTimesTableViewController: UITableViewController {
         return cell
     }
 
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     
-    }
-
-
-    // MARK: - Navigation
+    // MARK: - Navigation - this is not assigning this tableVC as delegate of TimeZoneTableVC
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToTimeZoneTableVC" {
-        guard let destVC = segue.destination as? TimeZoneTableViewController else {return}
-            destVC.delegate = self
-        //you can also do this part through cellForRowAt
+            let destNavigationController = segue.destination as! UINavigationController
+            let final = destNavigationController.topViewController as! TimeZoneTableViewController
+            final.delegate = self
         }
     }
+    //Beware, the destination of the segue object is whatever view controller is on the end of the segue from the storyboard. In this app, that is an instance of UINavigationController, so you'll need to dig through the view hierarchy to reach the object you actually want (TimeZonesTableViewController).
     
     func getCurrentIdentifier() {
         let identifier = TimeZone.current.identifier
@@ -66,8 +64,9 @@ class GlobalTimesTableViewController: UITableViewController {
 extension GlobalTimesTableViewController: TimeZoneDelegate {
     
     func didChooseTimeZone(_ timezone: String) {
-        self.timeIdentifiers.append(timezone)
-        navigationController?.dismiss(animated: true, completion: nil)
-        return
+        self.timeIdentifiers.append(timezone)    //this is not being called.....
+       
+        print(timeIdentifiers)
+        dismiss(animated: true, completion: nil)
     }
 }

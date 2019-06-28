@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
-protocol TimeZoneDelegate {
+protocol TimeZoneDelegate: class {
     func didChooseTimeZone(_ timezone: String)
 }
 
@@ -16,7 +17,7 @@ class TimeZoneTableViewController: UITableViewController {
 
     var timeIdentifiers = TimeZone.knownTimeZoneIdentifiers
     
-    var delegate: TimeZoneDelegate?
+    weak var delegate: TimeZoneDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,18 +32,19 @@ class TimeZoneTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimeZoneCell", for: indexPath)
-        let cityNames = getCityName()
-        let cityName = cityNames[indexPath.row]
+        let identifier = timeIdentifiers[indexPath.row]
+        let cityName = String(identifier.split(separator: "/").last ?? "nil")
         cell.textLabel?.text = cityName
         return cell
     }
 
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let delegate = delegate else {return}
             let selectedIdentifier = timeIdentifiers[indexPath.row]
-            self.tableView.deselectRow(at: indexPath, animated: true)
+            print(selectedIdentifier)
+        guard let delegate = delegate else {print("there is no delegate"); return}
             delegate.didChooseTimeZone(selectedIdentifier)
+            self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Navigation
@@ -51,7 +53,8 @@ class TimeZoneTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      
     }
-    
+  
+/* not necessary
     //remove GMT since it does not have [1] value
     func getCityName() -> [String] {
         var cityNames: [String] = []
@@ -64,6 +67,7 @@ class TimeZoneTableViewController: UITableViewController {
         }
         return cityNames
     }
+*/
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)

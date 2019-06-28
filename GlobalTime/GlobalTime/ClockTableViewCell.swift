@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /* not neccessary since I can get the time with abbreviation based on identifier
 enum TimeZoneCity: String {
@@ -35,12 +36,10 @@ class ClockTableViewCell: UITableViewCell {
     //now I can pass whole identifier to an array instead of just cityNames
     
     func updateViews() {
-        guard let identifier = identifier,
-            let abb = TimeZone(identifier: identifier)?.abbreviation() else {return}
-            self.clockView.timezone = TimeZone(abbreviation: abb)
-        
+        guard let identifier = identifier else {return}
+            self.clockView.timezone = TimeZone(identifier: identifier)
             //get cityname
-            let city = String(identifier.split(separator: "/")[1])
+        let city = String(identifier.split(separator: "/").last ?? "nil")
             self.timeZoneNameLabel.text = city
     }
 }
